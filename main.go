@@ -5,13 +5,20 @@ import (
     "log"
     "net/http"
 
-    "API/src/internal/routes"   
-    "API/src/internal/config"   
-    "API/src/internal/personas" 
+    "API/src/archivos/routes"
+    "API/src/config"
+    "API/src/archivos/personas"
 
     _ "github.com/go-sql-driver/mysql"
-    "github.com/gorilla/handlers" 
+    "github.com/gorilla/handlers"
 )
+
+func optionsHandler(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:5500")
+    w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+    w.WriteHeader(http.StatusOK)
+}
 
 func main() {
     config.LoadEnv()
@@ -28,14 +35,17 @@ func main() {
 
     r := routes.NewRouter(handler)
 
+    // Agregar un handler para las solicitudes OPTIONS en todas las rutas
+    r.Methods("OPTIONS").HandlerFunc(optionsHandler)
+
     // Configurar CORS
     headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"})
-    originsOk := handlers.AllowedOrigins([]string{"*"})
+    originsOk := handlers.AllowedOrigins([]string{"http://127.0.0.1:5500"})
     methodsOk := handlers.AllowedMethods([]string{"GET", "POST", "OPTIONS"})
 
-    log.Println("Servidor en ejecución en :8080")
-    // Usa el middleware CORS
-    if err := http.ListenAndServe(":8080", handlers.CORS(originsOk, headersOk, methodsOk)(r)); err != nil {
+    log.Println("Servidor en ejecución en :8085")
+
+    if err := http.ListenAndServe(":8085", handlers.CORS(originsOk, headersOk, methodsOk)(r)); err != nil {
         log.Fatalf("Error al iniciar el servidor: %v", err)
     }
 }

@@ -1,6 +1,6 @@
 package personas
 
-import "API/src/internal/models"
+import "API/src/archivos/models"
 
 type Service struct {
     repo *Repository

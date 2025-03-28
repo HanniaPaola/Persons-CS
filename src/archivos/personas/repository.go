@@ -2,7 +2,7 @@ package personas
 
 import (
     "database/sql"
-    "API/src/internal/models"
+    "API/src/archivos/models"
 )
 
 type Repository struct {

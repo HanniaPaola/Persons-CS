@@ -2,7 +2,7 @@ package routes
 
 import (
     "github.com/gorilla/mux"
-    "API/src/internal/personas"
+    "API/src/archivos/personas"
 )
 
 func NewRouter(handler *personas.Handler) *mux.Router {
