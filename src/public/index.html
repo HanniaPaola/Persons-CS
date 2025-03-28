@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Personas</title>
+    <link rel="stylesheet" href="../public/styles.css">
+</head>
+<body>
+    <h1>Registro de Personas</h1>
+    <form id="addPersonForm">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="number" id="edad" placeholder="Edad" required>
+        <select id="sexo" required>
+            <option value="">Selecciona Sexo</option>
+            <option value="true">Mujer</option>
+            <option value="false">Hombre</option>
+        </select>
+        <button type="submit">Registrar</button>
+    </form>
+
+    <h2>Contador de Género</h2>
+    <div id="genderCount">
+        <p id="hombres">Hombres: 0</p>
+        <p id="mujeres">Mujeres: 0</p>
+    </div>
+
+    <script src="../public//script.js"></script>
+</body>
+</html>
